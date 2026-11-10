@@ -1,0 +1,119 @@
+<?xml version='1.0' encoding='utf-8'?>
+<style xmlns="http://purl.org/net/xbiblio/csl" class="in-text" version="1.0" default-locale="en-GB" page-range-format="expanded">
+  <info>
+    <title>Contributions to Political Economy</title>
+    <id>http://www.zotero.org/styles/contributions-to-political-economy-local</id>
+    <link href="http://www.zotero.org/styles/contributions-to-political-economy-local" rel="self" />
+    <link href="https://academic.oup.com/cpe/pages/General_Instructions" rel="documentation" />
+    <category citation-format="author-date" />
+    <summary>Local journal-specific adaptation. OUP journal instructions: uppercase surnames in reference list, year in parentheses, author-comma-year citations with p./pp.; use original-date where provided. Original Date in Zotero Extra is needed for reprint-year handling.</summary>
+    <updated>2026-10-22T18:37:46+00:00</updated>
+    <rights license="http://creativecommons.org/licenses/by-sa/3.0/">Creative Commons Attribution-ShareAlike 3.0</rights>
+  </info>
+  <macro name="authors">
+    <names variable="author">
+      <name and="text" delimiter=", " initialize-with=". " name-as-sort-order="all">
+        <name-part name="family" text-case="uppercase" />
+      </name>
+      <substitute>
+        <names variable="editor" />
+        <text variable="title" />
+      </substitute>
+    </names>
+  </macro>
+  <macro name="short-authors">
+    <names variable="author">
+      <name and="text" delimiter=", " form="short" />
+      <substitute>
+        <names variable="editor" />
+        <text variable="title" />
+      </substitute>
+    </names>
+  </macro>
+  <macro name="year">
+    <choose>
+      <if variable="original-date">
+        <date variable="original-date">
+          <date-part name="year" />
+        </date>
+      </if>
+      <else>
+        <date variable="issued">
+          <date-part name="year" />
+        </date>
+      </else>
+    </choose>
+    <text variable="year-suffix" />
+  </macro>
+  <macro name="entry">
+    <group delimiter=". ">
+      <group delimiter=" ">
+        <text macro="authors" />
+        <text macro="year" prefix="(" suffix=")" />
+      </group>
+      <group delimiter=", ">
+        <choose>
+          <if type="article-journal article-magazine article-newspaper chapter paper-conference" match="any">
+            <text variable="title" />
+          </if>
+          <else>
+            <text variable="title" font-style="italic" />
+          </else>
+        </choose>
+        <choose>
+          <if type="article-journal article-magazine" match="any">
+            <text variable="container-title" font-style="italic" />
+            <text variable="volume" />
+            <text variable="issue" prefix="(" suffix=")" />
+            <text variable="page" />
+          </if>
+          <else-if type="chapter paper-conference" match="any">
+            <names variable="editor" prefix="In: ">
+              <name initialize-with=". " delimiter=", " />
+              <label form="short" prefix=" (" suffix=")" />
+            </names>
+            <text variable="container-title" font-style="italic" />
+            <text variable="publisher-place" />
+            <text variable="publisher" />
+            <text variable="page" />
+          </else-if>
+          <else>
+            <text variable="genre" />
+            <text variable="number" />
+            <text variable="publisher-place" />
+            <text variable="publisher" />
+          </else>
+        </choose>
+        <choose>
+          <if variable="original-date">
+            <date variable="issued" prefix="(" suffix=")">
+              <date-part name="year" />
+            </date>
+          </if>
+        </choose>
+      </group>
+      <text variable="URL" />
+    </group>
+  </macro>
+  <citation disambiguate-add-year-suffix="true" et-al-min="4" et-al-use-first="1">
+    <layout prefix="(" suffix=")" delimiter="; ">
+      <group delimiter=", ">
+        <text macro="short-authors" />
+        <text macro="year" />
+        <group delimiter=" ">
+          <label variable="locator" form="short" />
+          <text variable="locator" />
+        </group>
+      </group>
+    </layout>
+  </citation>
+  <bibliography hanging-indent="true">
+    <sort>
+      <key macro="authors" />
+      <key macro="year" />
+    </sort>
+    <layout suffix=".">
+      <text macro="entry" />
+    </layout>
+  </bibliography>
+</style>
